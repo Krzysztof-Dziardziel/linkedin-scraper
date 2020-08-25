@@ -1,4 +1,4 @@
-const seeMoreButtons = [
+const buttons = [
   {
     id: 'SHOW_MORE_ABOUT',
     selector: '#line-clamp-show-more-button'
@@ -21,16 +21,16 @@ const seeMoreButtons = [
 ]
 
 
-export const clickAll = async(page) => {
-  for(let i = 0; i < seeMoreButtons.length; i++){
-    const button = seeMoreButtons[i]
+export const seeMoreButtons = async(page:any) => {
+  for(let i = 0; i < buttons.length; i++){
+    const button = buttons[i]
     const elems = await page.$$(button.selector)
 
     for(let j = 0; j < elems.length; j++){
       const elem = elems[j]
       if (elem) {
         await elem.click()
-          .catch((e) => console.error(`couldn't click on ${button.selector}, it's probably invisible`))
+          .catch((e:any) => console.error(`couldn't click on ${button.selector}, it's probably invisible`))
       }
     }
   }

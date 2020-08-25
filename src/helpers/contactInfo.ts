@@ -1,4 +1,4 @@
-const scrapSection = require('../scrapSection')
+import {scrapSection} from "./scrapSection";
 
 const SEE_MORE_SELECTOR = 'a[data-control-name=contact_see_more]'
 const CLOSE_MODAL_SELECTOR = '.artdeco-modal__dismiss';
@@ -18,7 +18,7 @@ const template = {
     }
   }
 } 
-const getContactInfo = async(page) => {
+export const getContactInfo = async(page:any) => {
   await page.waitFor(SEE_MORE_SELECTOR, { timeout: 2000 })
     .catch(() => {
       console.error('contact-info', 'selector not found')
@@ -43,5 +43,3 @@ const getContactInfo = async(page) => {
   }
   
 }
-
-module.exports = getContactInfo

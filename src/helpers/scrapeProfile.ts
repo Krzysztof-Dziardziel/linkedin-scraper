@@ -1,13 +1,19 @@
 import {openPage} from "../openPage";
 import {scrollToPageBottom} from "./scrollToPageBottom";
+import {seeMoreButtons} from "./seeMoreButtons";
+import {scrapSection} from "./scrapSection";
+import {template} from "../profile/profileScraperTemplate";
+import {scrapAccomplishmentPanel} from "./scrapAccomplishmentPanel";
+import {getContactInfo} from "./contactInfo";
+import {cleanProfileData} from "./cleanProfileData";
 
-export const scrapeProfile = async (browser:any, cookies:any, url:string) => {
+export const scrapeProfile = async (browser: any, cookies: any, url: string) => {
     console.log(`starting scraping url: ${url}`)
     let waitTime = 50
 
-    const page = await openPage({ browser, cookies, url})
+    const page = await openPage({browser, cookies, url})
     const profilePageIndicatorSelector = '.pv-profile-section'
-    await page.waitFor(profilePageIndicatorSelector, { timeout: 5000 })
+    await page.waitFor(profilePageIndicatorSelector, {timeout: 5000})
         .catch(() => {
             console.error('profile selector was not found')
         })
@@ -15,16 +21,24 @@ export const scrapeProfile = async (browser:any, cookies:any, url:string) => {
     console.log('scrolling page to the bottom')
     await scrollToPageBottom(page)
 
-    if(waitTime) {
+    if (waitTime) {
         console.log(`applying 1st delay`)
-        await new Promise((resolve) => { setTimeout(() => { resolve() }, waitTime / 2)})
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve()
+            }, waitTime / 2)
+        })
     }
 
-    await seeMoreButtons.clickAll(page)
+    await seeMoreButtons(page)
 
-    if(waitTime) {
+    if (waitTime) {
         console.log(`applying 2nd (and last) delay`)
-        await new Promise((resolve) => { setTimeout(() => { resolve() }, waitTime / 2)})
+        await new Promise((resolve) => {
+            setTimeout(() => {
+                resolve()
+            }, waitTime / 2)
+        })
     }
 
     const [profile] = await scrapSection(page, template.profile)
@@ -41,10 +55,11 @@ export const scrapeProfile = async (browser:any, cookies:any, url:string) => {
     const projects = await scrapAccomplishmentPanel(page, 'projects')
     const volunteerExperience = await scrapSection(page, template.volunteerExperience)
     const peopleAlsoViewed = await scrapSection(page, template.peopleAlsoViewed)
-    const contact = hasToGetContactInfo ? await contactInfo(page) : []
+    const contact = await getContactInfo(page)
 
     await page.close()
     console.log(`finished scraping url: ${url}`)
+
 
     const rawProfile = {
         profile,
@@ -53,8 +68,10 @@ export const scrapeProfile = async (browser:any, cookies:any, url:string) => {
         educations,
         skills,
         recommendations: {
-            givenCount: recommendationsCount ? recommendationsCount.given : "0",
-            receivedCount: recommendationsCount ? recommendationsCount.received : "0",
+            //@ts-ignore
+            givenCount: recommendationsCount.given || "0",
+            //@ts-ignore
+            receivedCount: recommendationsCount.received || "0",
             given: recommendationsReceived,
             received: recommendationsGiven
         },

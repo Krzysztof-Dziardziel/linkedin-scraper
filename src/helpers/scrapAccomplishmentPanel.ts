@@ -1,18 +1,17 @@
-const scrapSection = require('../scrapSection');
-const template = require('./profileScraperTemplate');
+import {scrapSection} from "./scrapSection";
+import {template} from "../profile/profileScraperTemplate";
 
-const scrapAccomplishmentPanel = async (page, section) => {
+export const scrapAccomplishmentPanel = async (page:any, section:any) => {
   const queryString = `.pv-accomplishments-block.${section} button`
 
   const openingButton = await page.$(queryString);
 
   if (openingButton) {
-    await page.evaluate((q) => {
+    await page.evaluate((q:any) => {
       document.querySelector(q).click();
     }, queryString);
 
+    // @ts-ignore
     return scrapSection(page, template[section]);
   }
 };
-
-module.exports = scrapAccomplishmentPanel;

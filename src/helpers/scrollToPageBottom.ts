@@ -1,5 +1,5 @@
 
-export const scrollToPageBottom = async (page) => {
+export const scrollToPageBottom = async (page:any) => {
   const MAX_TIMES_TO_SCROLL = 25
   const TIMEOUT_BETWEEN_SCROLLS = 500
   const PAGE_BOTTOM_SELECTOR_STRING = '#expanded-footer'

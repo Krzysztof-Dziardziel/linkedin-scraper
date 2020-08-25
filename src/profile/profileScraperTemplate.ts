@@ -1,6 +1,6 @@
-const profileSelector = '.core-rail > *:first-child section >'
+export const profileSelector = '.core-rail > *:first-child section >'
 
-const template = {
+export const template = {
   profile: {
     selector: '.pv-top-card',
     fields: {
@@ -185,6 +185,3 @@ const template = {
     }
   }
 }
-
-
-module.exports = template
