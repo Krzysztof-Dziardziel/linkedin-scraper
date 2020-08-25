@@ -1,47 +1,51 @@
-export const cleanProfileData = (profile: any) => {
+import {Profile} from "../../api/interfaces/Profile";
+import {ProfileObject} from "./interfaces/interfaces";
+
+
+export const cleanProfileData = (profile:ProfileObject) => {
     if (!profile.profile.name) {
-        const messageError = `LinkedIn website changed and I can't read basic data.`
-        console.error(messageError, '')
-        throw new Error(messageError)
+        const messageError = `LinkedIn website changed and I can't read basic data.`;
+        console.error(messageError, '');
+        throw new Error(messageError);
     }
 
-    profile.profile.summary = profile.about.text
+    profile.profile.summary = profile.about.text;
 
     profile.positions.forEach((position: any) => {
         if (position.title) {
-            position.title = position.title.replace('Company Name\n', '')
+            position.title = position.title.replace('Company Name\n', '');
         }
         if (position.description) {
-            position.description = position.description.replace('See more', '')
-            position.description = position.description.replace('see more', '')
-            position.description = position.description.replace('See less', '')
+            position.description = position.description.replace('See more', '');
+            position.description = position.description.replace('see more', '');
+            position.description = position.description.replace('See less', '');
         }
         if (position.roles) {
             position.roles.forEach((role: any) => {
                 if (role.title) {
-                    role.title = role.title.replace('Title\n', '')
+                    role.title = role.title.replace('Title\n', '');
                 }
                 if (role.description) {
-                    role.description = role.description.replace('See more', '')
-                    role.description = role.description.replace('see more', '')
+                    role.description = role.description.replace('See more', '');
+                    role.description = role.description.replace('see more', '');
                 }
             })
         }
     })
 
     if (profile.recommendations.receivedCount) {
-        profile.recommendations.receivedCount = profile.recommendations.receivedCount.replace(/[^\d]/g, '')
+        profile.recommendations.receivedCount = profile.recommendations.receivedCount.replace(/[^\d]/g, '');
     }
 
     if (profile.recommendations.givenCount) {
-        profile.recommendations.givenCount = profile.recommendations.givenCount.replace(/[^\d]/g, '')
+        profile.recommendations.givenCount = profile.recommendations.givenCount.replace(/[^\d]/g, '');
     }
 
     if (profile.recommendations.received) {
         profile.recommendations.received.forEach((recommendation: any) => {
             if (recommendation.summary) {
-                recommendation.summary = recommendation.summary.replace('See more', '')
-                recommendation.summary = recommendation.summary.replace('See less', '')
+                recommendation.summary = recommendation.summary.replace('See more', '');
+                recommendation.summary = recommendation.summary.replace('See less', '');
             }
         })
     }
@@ -49,8 +53,8 @@ export const cleanProfileData = (profile: any) => {
     if (profile.recommendations.given) {
         profile.recommendations.given.forEach((recommendation: any) => {
             if (recommendation.summary) {
-                recommendation.summary = recommendation.summary.replace('See more', '')
-                recommendation.summary = recommendation.summary.replace('See less', '')
+                recommendation.summary = recommendation.summary.replace('See more', '');
+                recommendation.summary = recommendation.summary.replace('See less', '');
             }
         })
     }
@@ -60,11 +64,11 @@ export const cleanProfileData = (profile: any) => {
                 let coursesObj = {}
                 if (name) {
                     // @ts-ignore
-                    coursesObj.name = name.replace('Course name\n', '')
+                    coursesObj.name = name.replace('Course name\n', '');
                 }
                 if (year) {
                     // @ts-ignore
-                    coursesObj.year = year.replace('Course number\n', '')
+                    coursesObj.year = year.replace('Course number\n', '');
                 }
                 return coursesObj
             }
@@ -75,7 +79,7 @@ export const cleanProfileData = (profile: any) => {
         profile.languages = profile.languages.map(({name, proficiency}: any) => ({
             name: name ? name.replace('Language name\n', '') : undefined,
             proficiency,
-        }))
+        }));
     }
 
     if (profile.projects) {
@@ -86,8 +90,8 @@ export const cleanProfileData = (profile: any) => {
                 description: description ? description.replace('Project description\n', '') : undefined,
                 link,
             }),
-        )
+        );
     }
 
-    return profile
+    return profile;
 }
