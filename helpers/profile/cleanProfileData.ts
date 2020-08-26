@@ -1,6 +1,6 @@
-import {Language, ProfileObject, Project} from "./interfaces/profileObjectInterface";
+import {Language, ProfileObject, Project} from "../interfaces/profileObjectInterface";
 
-export const cleanProfileData = (profile: ProfileObject):ProfileObject => {
+export const cleanProfileData = (profile: ProfileObject): ProfileObject => {
     if (!profile.profile.name) {
         const messageError = `LinkedIn website changed and I can't read basic data.`;
         console.error(messageError, '');

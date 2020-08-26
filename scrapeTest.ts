@@ -1,4 +1,5 @@
 import {scrapeLinkedIn} from "./helpers/scrapeLinkedIn";
+
 require('dotenv').config();
 
 (async () => {

@@ -1,6 +1,6 @@
-import {scrapSection} from "./scrapSection";
-import {template} from "./templates/profileTemplate";
+import {template} from "../templates/profileTemplate";
 import {Page} from "puppeteer";
+import {scrapeProfileSection} from "../scrapeProfileSection";
 
 export const scrapAccomplishmentPanel = async (page: Page, section: string) => {
     const queryString = `.pv-accomplishments-block.${section} button`
@@ -13,6 +13,6 @@ export const scrapAccomplishmentPanel = async (page: Page, section: string) => {
         }, queryString);
 
         //@ts-ignore
-        return scrapSection(page, template[section]);
+        return scrapeProfileSection(page, template[section]);
     }
 };

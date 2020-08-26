@@ -1,6 +1,6 @@
 import {Page} from "puppeteer";
 
-export const scrapSelectorFields = (selector: any, section: any) => async (scrapedObjectPromise: any, fieldKey: any) => {
+export const scrapeProfileSelectorFields = (selector: any, section: any) => async (scrapedObjectPromise: any, fieldKey: any) => {
     const scrapedObject = await scrapedObjectPromise
     const field = section.fields[fieldKey]
     const fieldSelectorString = await field.selector
@@ -25,7 +25,7 @@ export const scrapSelectorFields = (selector: any, section: any) => async (scrap
         const fieldChildrenSelectors = await selector.$$(field.selector)
 
         scrapedObject[fieldKey] = await Promise.all(
-            fieldChildrenSelectors.map((s: any) => scrapSelector(s, field))
+            fieldChildrenSelectors.map((s: any) => scrapeProfileSelector(s, field))
         )
     } else if (field.attribute && field.attribute === 'href') {
         scrapedObject[fieldKey] = await selector.$eval(fieldSelectorString, (elem: any) => elem && elem.href ? elem.href.trim() : '')
@@ -37,15 +37,15 @@ export const scrapSelectorFields = (selector: any, section: any) => async (scrap
 
     return scrapedObject
 }
-const scrapSelector = (selector: any, section: any) =>
+const scrapeProfileSelector = (selector: any, section: any) =>
     Object.keys(section.fields)
-        .reduce(scrapSelectorFields(selector, section), Promise.resolve({}))
+        .reduce(scrapeProfileSelectorFields(selector, section), Promise.resolve({}))
 
-export const scrapSection = async (page: Page, section: any) => {
+export const scrapeProfileSection = async (page: Page, section: any) => {
     const sectionSelectors = await page.$$(section.selector)
 
     const scrapedPromises = sectionSelectors
-        .map((selector: any) => scrapSelector(selector, section))
+        .map((selector: any) => scrapeProfileSelector(selector, section))
 
     return Promise.all(scrapedPromises)
 }

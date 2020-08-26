@@ -1,7 +1,7 @@
 import {openPage} from "./openPage";
 import {LoginObject} from "./interfaces/interfaces";
 
-export const loginWithCredentials = async ({browser, email, password}:LoginObject):Promise<void> => {
+export const loginWithCredentials = async ({browser, email, password}: LoginObject): Promise<void> => {
     const url = 'https://www.linkedin.com/login'
     const page = await openPage({browser, url})
     console.log(`logging at: ${url}`)
