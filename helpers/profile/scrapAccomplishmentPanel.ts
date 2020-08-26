@@ -1,8 +1,9 @@
 import {Page} from "puppeteer";
-import {scrapeProfileSection} from "./scrapeProfileSection";
+import {scrapeSection} from "./scrapeSection";
 import {profileTemplate} from "../templates/profileTemplate";
+import {Language, Project} from "../interfaces/profileObjectInterface";
 
-export const scrapAccomplishmentPanel = async (page: Page, section: string) => {
+export const scrapAccomplishmentPanel = async (page: Page, section: string): Promise<Language[] | Project[] | undefined> => {
     const queryString = `.pv-accomplishments-block.${section} button`
 
     const openingButton = await page.$(queryString);
@@ -13,6 +14,6 @@ export const scrapAccomplishmentPanel = async (page: Page, section: string) => {
         }, queryString);
 
         //@ts-ignore
-        return scrapeProfileSection(page, profileTemplate[section]);
+        return scrapeSection(page, profileTemplate[section]);
     }
 };

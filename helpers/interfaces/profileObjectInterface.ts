@@ -7,11 +7,11 @@ export interface ProfileObject {
     recommendations: Recommendations,
     courses?: any
     accomplishments: Accomplishment[],
-    languages: Language[],
-    projects: Project[],
+    languages: Language[]|undefined,
+    projects: Language[]|Project[]|undefined,
     peopleAlsoViewed: PeopleAlsoViewedObject[],
     volunteerExperience: any,
-    contact: ContactObject[]
+    contact: ContactObject[]|undefined
 }
 
 interface Profile {
@@ -92,7 +92,7 @@ interface PeopleAlsoViewedObject {
     name: string
 }
 
-interface ContactObject {
+export interface ContactObject {
     type: string,
     values: string[],
     links: string[]

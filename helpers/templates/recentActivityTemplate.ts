@@ -1,6 +1,6 @@
 export const recentActivityTemplate = {
     recentActivity: {
-        selector: 'feed-shared-update-v2',
+        selector: '.feed-shared-update-v2',
         fields: {
             activity: '.feed-shared-text-view'
         }
