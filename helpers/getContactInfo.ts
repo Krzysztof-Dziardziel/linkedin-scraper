@@ -1,4 +1,5 @@
 import {scrapSection} from "./scrapSection";
+import {Page} from "puppeteer";
 
 const SEE_MORE_SELECTOR = 'a[data-control-name=contact_see_more]'
 const CLOSE_MODAL_SELECTOR = '.artdeco-modal__dismiss';
@@ -18,7 +19,7 @@ const template = {
         }
     }
 }
-export const getContactInfo = async (page: any) => {
+export const getContactInfo = async (page: Page) => {
     await page.waitFor(SEE_MORE_SELECTOR, {timeout: 2000})
         .catch(() => {
             console.error('contact-info', 'selector not found')

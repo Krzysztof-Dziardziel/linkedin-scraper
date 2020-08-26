@@ -1,7 +1,8 @@
 import {scrapSection} from "./scrapSection";
-import {template} from "./profileTemplate";
+import {template} from "./templates/profileTemplate";
+import {Page} from "puppeteer";
 
-export const scrapAccomplishmentPanel = async (page: any, section: any) => {
+export const scrapAccomplishmentPanel = async (page: Page, section: string) => {
     const queryString = `.pv-accomplishments-block.${section} button`
 
     const openingButton = await page.$(queryString);

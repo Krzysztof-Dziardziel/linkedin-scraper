@@ -1,8 +1,6 @@
-import {Profile} from "../../api/interfaces/Profile";
-import {ProfileObject} from "./interfaces/interfaces";
+import {Language, ProfileObject, Project} from "./interfaces/profileObjectInterface";
 
-
-export const cleanProfileData = (profile:ProfileObject) => {
+export const cleanProfileData = (profile: ProfileObject):ProfileObject => {
     if (!profile.profile.name) {
         const messageError = `LinkedIn website changed and I can't read basic data.`;
         console.error(messageError, '');
@@ -76,15 +74,17 @@ export const cleanProfileData = (profile:ProfileObject) => {
     }
 
     if (profile.languages) {
-        profile.languages = profile.languages.map(({name, proficiency}: any) => ({
+        // @ts-ignore
+        profile.languages = profile.languages.map(({name, proficiency}: Language) => ({
             name: name ? name.replace('Language name\n', '') : undefined,
             proficiency,
         }));
     }
 
     if (profile.projects) {
+        // @ts-ignore
         profile.projects = profile.projects.map(
-            ({name, date, description, link}: any) => ({
+            ({name, date, description, link}: Project) => ({
                 name: name ? name.replace('Project name\n', '') : undefined,
                 date,
                 description: description ? description.replace('Project description\n', '') : undefined,

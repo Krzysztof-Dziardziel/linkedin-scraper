@@ -73,11 +73,12 @@ interface Accomplishment {
     items: string[]
 }
 
-interface Language {
-    name: string
+export interface Language {
+    name: string,
+    proficiency?: string
 }
 
-interface Project {
+export interface Project {
     name: string,
     date: string,
     description: string,

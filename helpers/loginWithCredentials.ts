@@ -1,6 +1,7 @@
 import {openPage} from "./openPage";
+import {LoginObject} from "./interfaces/interfaces";
 
-export const loginWithCredentials = async (browser: any, email: string, password: string) => {
+export const loginWithCredentials = async ({browser, email, password}:LoginObject):Promise<void> => {
     const url = 'https://www.linkedin.com/login'
     const page = await openPage({browser, url})
     console.log(`logging at: ${url}`)
@@ -62,7 +63,7 @@ export const loginWithCredentials = async (browser: any, email: string, password
                 return Promise.reject(new Error('linkedin: invalid password'))
             }
 
-            if (page.$(manualChallengeRequested)) {
+            if (manualChallengeRequested) {
                 console.error('manual check was required')
                 return Promise.reject(new Error(`linkedin: manual check was required, verify if your login is properly working manually.`))
             }

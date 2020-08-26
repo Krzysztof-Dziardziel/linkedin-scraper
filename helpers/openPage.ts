@@ -1,4 +1,5 @@
 import {OpenPageObject} from "./interfaces/interfaces";
+import {Page} from "puppeteer";
 
 const agents = [
     'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36',
@@ -12,7 +13,7 @@ const agents = [
     "Mozilla/5.0 (Windows NT 6.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36"
 ];
 
-export const openPage = async ({browser, url, cookies}: OpenPageObject) => {
+export const openPage = async ({browser, url, cookies}: OpenPageObject):Promise<Page> => {
     const page = await browser.newPage();
 
     if (cookies) {

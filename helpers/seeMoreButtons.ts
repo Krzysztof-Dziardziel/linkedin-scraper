@@ -34,6 +34,4 @@ export const seeMoreButtons = async (page: any) => {
             }
         }
     }
-
-    return;
 }

@@ -10,7 +10,7 @@ export const scrapeLinkedIn = async ({email, password, cookies}: ScrapeLinkedInO
     let browser = await puppeteer.launch(args);
 
     try {
-        await login({browser, email, password});
+        await login({browser, email, password, cookies});
     } catch (e) {
         throw e;
     }

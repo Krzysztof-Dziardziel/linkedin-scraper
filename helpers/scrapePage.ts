@@ -1,15 +1,10 @@
 import {scrapeProfile} from "./scrapeProfile";
-import {scrapeRecentActivity} from "./scrapeRecentActivity";
+import {scrapeRecentActivity} from "./notreadyyet/scrapeRecentActivity";
 import {scrapeCompany} from "./notreadyyet/scrapeCompany";
 import {recentURLToProfile} from "./recentURLToProfile";
+import {ScrapePageObject} from "./interfaces/interfaces";
 
-interface scrapePageObject {
-    browser: any,
-    url: string,
-    cookies?: any
-}
-
-export const scrapePage = async ({browser, url, cookies}: scrapePageObject) => {
+export const scrapePage = async ({browser, url, cookies}: ScrapePageObject) => {
     let profile, recentActivity, company;
     if (url?.includes('/in')) {
         profile = await scrapeProfile({browser, url, cookies});
@@ -18,12 +13,14 @@ export const scrapePage = async ({browser, url, cookies}: scrapePageObject) => {
     }
 
     if (url?.includes('/company')) {
-        await scrapeCompany(browser, cookies, url);
+        company = await scrapeCompany(browser, cookies, url);
+        return {company};
     }
 
     if (url?.includes('/recent-activity')) {
-        await scrapeRecentActivity(browser, url, cookies);
-        await scrapeProfile({browser, url: recentURLToProfile(url), cookies});
+        recentActivity = await scrapeRecentActivity(browser, url, cookies);
+        profile = await scrapeProfile({browser, url: recentURLToProfile(url), cookies});
+        return {profile, recentActivity};
     }
 
 }

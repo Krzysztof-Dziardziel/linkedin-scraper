@@ -2,13 +2,14 @@ import {openPage} from "./openPage";
 import {scrollToPageBottom} from "./scrollToPageBottom";
 import {seeMoreButtons} from "./seeMoreButtons";
 import {scrapSection} from "./scrapSection";
-import {template} from "./profileTemplate";
+import {template} from "./templates/profileTemplate";
 import {scrapAccomplishmentPanel} from "./scrapAccomplishmentPanel";
 import {getContactInfo} from "./getContactInfo";
 import {cleanProfileData} from "./cleanProfileData";
-import {scrapeProfileObject} from "./interfaces/interfaces";
+import {ScrapeProfileObject} from "./interfaces/interfaces";
+import {ProfileObject} from "./interfaces/profileObjectInterface";
 
-export const scrapeProfile = async ({browser, url, cookies}: scrapeProfileObject) => {
+export const scrapeProfile = async ({browser, url, cookies}: ScrapeProfileObject):Promise<ProfileObject> => {
     console.log(`starting scraping url: ${url}`)
     let waitTime = 50
 

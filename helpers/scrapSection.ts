@@ -1,3 +1,5 @@
+import {Page} from "puppeteer";
+
 export const scrapSelectorFields = (selector: any, section: any) => async (scrapedObjectPromise: any, fieldKey: any) => {
     const scrapedObject = await scrapedObjectPromise
     const field = section.fields[fieldKey]
@@ -39,7 +41,7 @@ const scrapSelector = (selector: any, section: any) =>
     Object.keys(section.fields)
         .reduce(scrapSelectorFields(selector, section), Promise.resolve({}))
 
-export const scrapSection = async (page: any, section: any) => {
+export const scrapSection = async (page: Page, section: any) => {
     const sectionSelectors = await page.$$(section.selector)
 
     const scrapedPromises = sectionSelectors

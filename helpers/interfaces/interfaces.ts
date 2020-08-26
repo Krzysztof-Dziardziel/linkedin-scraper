@@ -1,5 +1,7 @@
+import {Browser, Cookie} from "puppeteer";
+
 export interface LoginObject {
-    browser?: any,
+    browser: Browser,
     email?: string,
     password?: string,
     cookies?: any,
@@ -18,7 +20,18 @@ export interface ScrapeLinkedInObject {
     cookies?: any
 }
 
-export interface scrapeProfileObject {
+export interface ScrapeProfileObject {
+    browser: any,
+    url: string,
+    cookies?: any
+}
+
+export interface CookieLogin {
+    cookies: Cookie,
+    url: string
+}
+
+export interface ScrapePageObject {
     browser: any,
     url: string,
     cookies?: any
