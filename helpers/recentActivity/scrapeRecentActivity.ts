@@ -3,7 +3,7 @@ import {ProfileObject} from "../interfaces/profileObjectInterface";
 import {openPage} from "../openPage";
 import {prepareForScraping} from "../prepareForScraping";
 import {recentActivityTemplate} from "../templates/recentActivityTemplate";
-import {scrapeProfileSection} from "../profile/scrapeProfileSection";
+import {scrapeSection} from "../scrapeSection";
 
 //https://www.linkedin.com/in/some-random-person-123/detail/recent-activity/
 //https://www.linkedin.com/in/agata-jakobczak-akademia-face/detail/recent-activity/
@@ -23,15 +23,11 @@ export const scrapeRecentActivity = async ({browser, url, cookies}: ScrapeProfil
 
     await prepareForScraping(page, waitTime);
 
-    const recentActivity = await scrapeProfileSection(page, recentActivityTemplate.recentActivity)
+    const recentActivity = await scrapeSection(page, recentActivityTemplate.recentActivity)
 
     await page.close()
     console.log(`finished scraping url: ${url}`)
 
-
-    const rawRecentActivity = {
-        recentActivity
-    }
 //@ts-ignore
 //     const cleanedProfile = cleanProfileData(rawProfile)
     return recentActivity
