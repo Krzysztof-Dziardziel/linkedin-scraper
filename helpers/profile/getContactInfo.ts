@@ -1,5 +1,5 @@
 import {Page} from "puppeteer";
-import {scrapeProfileSection} from "../scrapeProfileSection";
+import {scrapeProfileSection} from "./scrapeProfileSection";
 
 const SEE_MORE_SELECTOR = 'a[data-control-name=contact_see_more]'
 const CLOSE_MODAL_SELECTOR = '.artdeco-modal__dismiss';

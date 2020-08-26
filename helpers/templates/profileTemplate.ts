@@ -1,4 +1,4 @@
-export const template = {
+export const profileTemplate = {
     profile: {
         selector: '.pv-top-card',
         fields: {

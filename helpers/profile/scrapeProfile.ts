@@ -1,12 +1,12 @@
 import {openPage} from "../openPage";
-import {template} from "../templates/profileTemplate";
+import {profileTemplate} from "../templates/profileTemplate";
 import {scrapAccomplishmentPanel} from "./scrapAccomplishmentPanel";
 import {getContactInfo} from "./getContactInfo";
 import {cleanProfileData} from "./cleanProfileData";
 import {ScrapeProfileObject} from "../interfaces/interfaces";
 import {ProfileObject} from "../interfaces/profileObjectInterface";
 import {prepareForScraping} from "../prepareForScraping";
-import {scrapeProfileSection} from "../scrapeProfileSection";
+import {scrapeProfileSection} from "./scrapeProfileSection";
 
 export const scrapeProfile = async ({browser, url, cookies}: ScrapeProfileObject): Promise<ProfileObject> => {
     console.log(`starting scraping url: ${url}`)
@@ -21,20 +21,20 @@ export const scrapeProfile = async ({browser, url, cookies}: ScrapeProfileObject
 
     await prepareForScraping(page, waitTime);
 
-    const [profile] = await scrapeProfileSection(page, template.profile)
-    const [about] = await scrapeProfileSection(page, template.about)
-    const positions = await scrapeProfileSection(page, template.positions)
-    const educations = await scrapeProfileSection(page, template.educations)
-    const [recommendationsCount] = await scrapeProfileSection(page, template.recommendationsCount)
-    const recommendationsReceived = await scrapeProfileSection(page, template.recommendationsReceived)
-    const recommendationsGiven = await scrapeProfileSection(page, template.recommendationsGiven)
-    const skills = await scrapeProfileSection(page, template.skills)
-    const accomplishments = await scrapeProfileSection(page, template.accomplishments)
+    const [profile] = await scrapeProfileSection(page, profileTemplate.profile)
+    const [about] = await scrapeProfileSection(page, profileTemplate.about)
+    const positions = await scrapeProfileSection(page, profileTemplate.positions)
+    const educations = await scrapeProfileSection(page, profileTemplate.educations)
+    const [recommendationsCount] = await scrapeProfileSection(page, profileTemplate.recommendationsCount)
+    const recommendationsReceived = await scrapeProfileSection(page, profileTemplate.recommendationsReceived)
+    const recommendationsGiven = await scrapeProfileSection(page, profileTemplate.recommendationsGiven)
+    const skills = await scrapeProfileSection(page, profileTemplate.skills)
+    const accomplishments = await scrapeProfileSection(page, profileTemplate.accomplishments)
     const courses = await scrapAccomplishmentPanel(page, 'courses')
     const languages = await scrapAccomplishmentPanel(page, 'languages')
     const projects = await scrapAccomplishmentPanel(page, 'projects')
-    const volunteerExperience = await scrapeProfileSection(page, template.volunteerExperience)
-    const peopleAlsoViewed = await scrapeProfileSection(page, template.peopleAlsoViewed)
+    const volunteerExperience = await scrapeProfileSection(page, profileTemplate.volunteerExperience)
+    const peopleAlsoViewed = await scrapeProfileSection(page, profileTemplate.peopleAlsoViewed)
     const contact = await getContactInfo(page)
 
     await page.close()
