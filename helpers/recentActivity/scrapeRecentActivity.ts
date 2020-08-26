@@ -12,7 +12,7 @@ import {scrapeSection} from "../scrapeSection";
 export const scrapeRecentActivity = async (
     {browser, url, cookies}: ScrapeProfileObject,
     {getContact, waitTime, timeout}: ScrapeConfig = {getContact: true, waitTime: 50, timeout: 5000}
-): Promise<ProfileObject> => {
+): Promise<any[]> => {
     // console.warn('EXPERIMENTAL!')
     // console.log(`starting scraping recentActivity url: ${url}`)
     const page = await openPage({browser, cookies, url})

@@ -2,19 +2,13 @@ import {Page} from "puppeteer";
 
 export const scrapeProfileSelectorFields = (selector: any, section: any) => async (scrapedObjectPromise: any, fieldKey: any) => {
 
-    console.log("FK", fieldKey);
-
     const scrapedObject = await scrapedObjectPromise
     const field = section.fields[fieldKey]
     const fieldSelectorString = await field.selector
         ? field.selector
         : field
 
-    console.log("FSS", fieldSelectorString, selector);
-
     const isFieldPresent = await selector.$(fieldSelectorString)
-
-    console.log("IS", isFieldPresent);
 
     if (!isFieldPresent) {
         return scrapedObject
@@ -42,8 +36,6 @@ export const scrapeProfileSelectorFields = (selector: any, section: any) => asyn
         scrapedObject[fieldKey] = await selector.$eval(fieldSelectorString, (elem: any) => elem && elem.innerText ? elem.innerText.trim() : '')
     }
 
-    console.log("SO", scrapedObject);
-
     return scrapedObject
 }
 const scrapeProfileSelector = (selector: any, section: any) =>
@@ -57,9 +49,5 @@ export const scrapeSection = async (page: Page, section: any): Promise<any[]> =>
         .map((selector: any) => scrapeProfileSelector(selector, section))
 
 
-    const res = await Promise.all(scrapedPromises)
-
-    console.log("S", section, res);
-
-    return res;
+    return Promise.all(scrapedPromises)
 }
