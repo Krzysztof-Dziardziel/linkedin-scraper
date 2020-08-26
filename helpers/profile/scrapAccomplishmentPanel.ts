@@ -1,5 +1,5 @@
 import {Page} from "puppeteer";
-import {scrapeSection} from "./scrapeSection";
+import {scrapeSection} from "../scrapeSection";
 import {profileTemplate} from "../templates/profileTemplate";
 import {Language, Project} from "../interfaces/profileObjectInterface";
 

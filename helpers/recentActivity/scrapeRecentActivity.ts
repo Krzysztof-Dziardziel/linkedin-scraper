@@ -4,7 +4,7 @@ import {openPage} from "../openPage";
 import {prepareForScraping} from "../prepareForScraping";
 import {recentActivityTemplate} from "../templates/recentActivityTemplate";
 import {ScrapeConfig} from "../profile/scrapeProfile";
-import {scrapeSection} from "../profile/scrapeSection";
+import {scrapeSection} from "../scrapeSection";
 
 //https://www.linkedin.com/in/some-random-person-123/detail/recent-activity/
 //https://www.linkedin.com/in/agata-jakobczak-akademia-face/detail/recent-activity/

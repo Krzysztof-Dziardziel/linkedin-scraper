@@ -6,7 +6,7 @@ import {cleanProfileData} from "./cleanProfileData";
 import {ScrapeProfileObject} from "../interfaces/interfaces";
 import {ProfileObject} from "../interfaces/profileObjectInterface";
 import {prepareForScraping} from "../prepareForScraping";
-import {scrapeSection} from "./scrapeSection";
+import {scrapeSection} from "../scrapeSection";
 
 export interface ScrapeConfig {
     getContact: boolean,
