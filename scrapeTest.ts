@@ -3,7 +3,7 @@ const debug = require('debug')('linkedin')
 require('dotenv').config();
 
 (async () => {
-    const mongoDBSync = true;
+    // const mongoDBSync = true;
     const profileScraper = await scrapeLinkedIn({
         email: process.env.LINKEDIN_EMAIL,
         password: process.env.LINKEDIN_PASSWORD

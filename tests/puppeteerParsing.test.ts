@@ -62,20 +62,16 @@ describe('Puppeteer parsing works.', () => {
         expect(res).toStrictEqual([{prop: 'TARGET'}])
     })
 
-    it('For profile', async () => {
+    it('Profile details', async () => {
         const {profile} = await scrapeProfile({browser, url: `file://${__dirname}/files/profile.html`}, defaultConfig);
-        expect(profile.name).toEqual('Daniel Gustaw');
-    });
-
-    it('For recentActivity', async () => {
-        const res = await scrapeRecentActivity({
-            browser,
-            url: `file://${__dirname}/files/activity.html`
-        }, defaultConfig);
-
-        expect(Array.isArray(res)).toBeTruthy();
-
-        expect(res.some((e:any) => e.activity.match(/Daniel Gustaw/))).toBeTruthy();
+        expect(profile).toEqual({
+            "connections": "500+ kontaktów",
+            "headline": "Właściciel w Precise Lab - Software House | Wykładowca w Coders Lab | Back-end Senior Developer",
+            "location": "Warszawa, Woj. Mazowieckie, Polska",
+            "name": "Daniel Gustaw",
+            "profile_url": `file://${__dirname}/files/profile.html`,
+            "summary": "Programowanie to moja pasja, którą rozwijam od ponad 10 lat. Razem z przyjaciółmi prowadzę dom programistyczny, w którym tworzymy nowoczesne rozwiązania dla biznesu, optymalizujące czas pracy i maksymalizujące zyski w przedsiębiorstwach."
+        });
     });
 
     it('Activity from scratch', async () => {

@@ -1,6 +1,6 @@
 test.js
 cookies.json
-helpers/sendDataToDB.ts
+helpers/
 
 # Logs
 logs

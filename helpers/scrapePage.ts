@@ -3,6 +3,7 @@ import {scrapeRecentActivity} from "./recentActivity/scrapeRecentActivity";
 import {scrapeCompany} from "./notreadyyet/scrapeCompany";
 import {recentURLToProfile} from "./profile/recentURLToProfile";
 import {ScrapePageObject} from "./interfaces/interfaces";
+import {ProfileObject} from "./interfaces/profileObjectInterface";
 
 export const scrapePage = async ({browser, url, cookies}: ScrapePageObject) => {
     let profile, recentActivity, company;

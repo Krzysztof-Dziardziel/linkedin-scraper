@@ -18,7 +18,6 @@ export const scrapeProfile = async (
     {browser, url, cookies}: ScrapeProfileObject,
     {getContact, waitTime, timeout}: ScrapeConfig = {getContact: true, waitTime: 50, timeout: 5000}
 ): Promise<ProfileObject> => {
-    // console.log(`starting scraping url: ${url}`)
 
     const page = await openPage({browser, cookies, url})
 
@@ -51,11 +50,13 @@ export const scrapeProfile = async (
     const contact = getContact ? await getContactInfo(page) : undefined;
 
     await page.close()
-    // console.log(`finished scraping url: ${url}`)
 
 
     const rawProfile: ProfileObject = {
-        profile,
+        profile: {
+            ...profile,
+            profile_url: url
+        },
         about,
         positions,
         educations,
