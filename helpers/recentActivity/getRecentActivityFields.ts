@@ -10,7 +10,7 @@ export const getRecentActivityFields = async (page: Page) => {
             activity: await fieldToText(await el.$(recentActivityTemplate.fields.activity)),
             post_author: await fieldToText(await el.$(recentActivityTemplate.fields.post_author)),
             post_author_description: await fieldToText(await el.$(recentActivityTemplate.fields.post_author_description)),
-            post_date: await fieldToText(await el.$(recentActivityTemplate.fields.post_date)),
+            post_date: await fieldToText(await el.$(recentActivityTemplate.fields.post_date)) || await fieldToText(await el.$(recentActivityTemplate.fields.post_date_alt)),
             post_text: await fieldToText(await el.$(recentActivityTemplate.fields.post_text)),
             // @ts-ignore
             reaction_count: parseInt(await fieldToText(await el.$(recentActivityTemplate.fields.reaction_count))),
@@ -19,6 +19,7 @@ export const getRecentActivityFields = async (page: Page) => {
             highlighted_comment: {
                 comment_author: await fieldToText(await el.$(recentActivityTemplate.fields.highlighted_comment.comment_author)),
                 comment_author_description: await fieldToText(await el.$(recentActivityTemplate.fields.highlighted_comment.comment_author_description)),
+                comment_date: await fieldToText(await el.$(recentActivityTemplate.fields.highlighted_comment.comment_date)),
                 comment_text: await fieldToText(await el.$(recentActivityTemplate.fields.highlighted_comment.comment_text)),
                 // @ts-ignore
                 likes: parseInt(await fieldToText(await el.$(recentActivityTemplate.fields.highlighted_comment.likes))) || 0,

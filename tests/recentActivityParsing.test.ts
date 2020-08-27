@@ -33,6 +33,9 @@ describe('Parsing using getRecentActivityFields works.', () => {
         const posts = await getRecentActivityFields(page);
 
         // @ts-ignore
+        console.log(posts[0]);
+
+        // @ts-ignore
         expect(posts[0]).toStrictEqual({
             "activity": "Daniel Gustaw skomentował(a) to",
             "post_author": "Robert Strzelecki",
@@ -44,6 +47,7 @@ describe('Parsing using getRecentActivityFields works.', () => {
             "highlighted_comment": {
                 "comment_author": "Daniel GustawTy",
                 "comment_author_description": "Właściciel w Precise Lab - Software House | Wykładowca w Coders Lab | Back-end Senior Developer",
+                "comment_date": "2 mies.",
                 "comment_text": "Trzymam kciuki!",
                 "likes": 0,
             },

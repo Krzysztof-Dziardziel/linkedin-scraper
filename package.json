@@ -1,12 +1,7 @@
 {
-  "name": "scrapedin",
-  "version": "1.0.21",
-  "description": "linkedin scraper for 2020 website",
-  "keywords": [
-    "linkedin",
-    "scraper",
-    "crawler"
-  ],
+  "name": "linkedin-scraper",
+  "version": "1.0.0",
+  "description": "",
   "scripts": {
     "start": "ts-node scrapeTest.ts",
     "debug": "DEBUG=linkedin ts-node scrapeTest.ts",
@@ -16,16 +11,12 @@
     "type": "git",
     "url": "https://github.com/linkedtales/scrapedin"
   },
-  "bugs": {
-    "url": "https://github.com/linkedtales/scrapedin/issues"
-  },
   "author": "Wagner Leonardi <leonardiwagner@gmail.com>",
   "license": "Apache-2.0",
   "dependencies": {
     "@types/puppeteer": "^3.0.1",
     "dotenv": "^8.2.0",
-    "puppeteer": "^1.20.0",
-    "winston": "3.1.0"
+    "puppeteer": "^1.20.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",

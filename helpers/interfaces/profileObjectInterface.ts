@@ -15,6 +15,7 @@ export interface ProfileObject {
 }
 
 interface Profile {
+    profile_url: string,
     name: string,
     headline: string,
     location: string,
