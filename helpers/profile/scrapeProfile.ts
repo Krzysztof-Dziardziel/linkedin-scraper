@@ -6,7 +6,7 @@ import {cleanProfileData} from "./cleanProfileData";
 import {ScrapeProfileObject} from "../interfaces/interfaces";
 import {ProfileObject} from "../interfaces/profileObjectInterface";
 import {prepareForScraping} from "../prepareForScraping";
-import {scrapeSection} from "../scrapeSection";
+import {scrapeProfileSection} from "../scrapeProfileSection";
 
 export interface ScrapeConfig {
     getContact: boolean,
@@ -34,20 +34,20 @@ export const scrapeProfile = async (
 
     }
 
-    const [profile] = await scrapeSection(page, profileTemplate.profile)
-    const [about] = await scrapeSection(page, profileTemplate.about)
-    const positions = await scrapeSection(page, profileTemplate.positions)
-    const educations = await scrapeSection(page, profileTemplate.educations)
-    const [recommendationsCount] = await scrapeSection(page, profileTemplate.recommendationsCount)
-    const recommendationsReceived = await scrapeSection(page, profileTemplate.recommendationsReceived)
-    const recommendationsGiven = await scrapeSection(page, profileTemplate.recommendationsGiven)
-    const skills = await scrapeSection(page, profileTemplate.skills)
-    const accomplishments = await scrapeSection(page, profileTemplate.accomplishments)
+    const [profile] = await scrapeProfileSection(page, profileTemplate.profile)
+    const [about] = await scrapeProfileSection(page, profileTemplate.about)
+    const positions = await scrapeProfileSection(page, profileTemplate.positions)
+    const educations = await scrapeProfileSection(page, profileTemplate.educations)
+    const [recommendationsCount] = await scrapeProfileSection(page, profileTemplate.recommendationsCount)
+    const recommendationsReceived = await scrapeProfileSection(page, profileTemplate.recommendationsReceived)
+    const recommendationsGiven = await scrapeProfileSection(page, profileTemplate.recommendationsGiven)
+    const skills = await scrapeProfileSection(page, profileTemplate.skills)
+    const accomplishments = await scrapeProfileSection(page, profileTemplate.accomplishments)
     const courses = await scrapAccomplishmentPanel(page, 'courses')
     const languages = await scrapAccomplishmentPanel(page, 'languages')
     const projects = await scrapAccomplishmentPanel(page, 'projects')
-    const volunteerExperience = await scrapeSection(page, profileTemplate.volunteerExperience)
-    const peopleAlsoViewed = await scrapeSection(page, profileTemplate.peopleAlsoViewed)
+    const volunteerExperience = await scrapeProfileSection(page, profileTemplate.volunteerExperience)
+    const peopleAlsoViewed = await scrapeProfileSection(page, profileTemplate.peopleAlsoViewed)
     const contact = getContact ? await getContactInfo(page) : undefined;
 
     await page.close()

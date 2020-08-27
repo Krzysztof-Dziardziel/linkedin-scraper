@@ -4,13 +4,13 @@ import {scrapeProfile} from "../helpers/profile/scrapeProfile";
 import {Browser} from "puppeteer";
 import {scrapeRecentActivity} from "../helpers/recentActivity/scrapeRecentActivity";
 import {openPage} from "../helpers/openPage";
-import {scrapeSection} from "../helpers/scrapeSection";
-import {Page} from "puppeteer";
+import {scrapeProfileSection} from "../helpers/scrapeProfileSection";
+import {getRecentActivityFields} from "../helpers/recentActivity/getRecentActivityFields";
 import {recentActivityTemplate} from "../helpers/templates/recentActivityTemplate";
 
 const puppeteer = require('puppeteer');
 
-describe('Parsing works great', () => {
+describe('Puppeteer parsing works.', () => {
     let browser: Browser;
 
     const defaultConfig = {
@@ -29,7 +29,22 @@ describe('Parsing works great', () => {
 
     })
 
-    it('Scrape Section', async () => {
+    it('Puppeteer selectors works', async () => {
+
+        const page = await openPage({browser, url: `file://${__dirname}/files/page.html`})
+
+        const target = await page.$('.target');
+
+        expect(target).not.toBeNull();
+
+        if (target) {
+            const text = await (await target.getProperty('textContent')).jsonValue();
+            expect(text).toEqual('TARGET');
+
+        }
+    });
+
+    it('Scrape mock section', async () => {
 
         const page = await openPage({browser, url: `file://${__dirname}/files/page.html`})
 
@@ -42,7 +57,7 @@ describe('Parsing works great', () => {
             }
         };
 
-        const res = await scrapeSection(page, config.main);
+        const res = await scrapeProfileSection(page, config.main);
 
         expect(res).toStrictEqual([{prop: 'TARGET'}])
     })
@@ -60,7 +75,7 @@ describe('Parsing works great', () => {
 
         expect(Array.isArray(res)).toBeTruthy();
 
-        expect(res.some((e) => e.activity.match(/Daniel Gustaw/))).toBeTruthy();
+        expect(res.some((e:any) => e.activity.match(/Daniel Gustaw/))).toBeTruthy();
     });
 
     it('Activity from scratch', async () => {
@@ -75,31 +90,14 @@ describe('Parsing works great', () => {
 
         expect(fields.length).toBeGreaterThan(0);
 
-        if(fields.length) {
+        if (fields.length) {
 
-            const field:any = fields[0];
+            const field: any = fields[0];
             expect(Boolean(field)).toBeTruthy();
 
             const text = await (await field.getProperty('textContent')).jsonValue();
             expect(text).toStrictEqual('Daniel Gustaw skomentował(a) to');
 
         }
-
     });
-
-    it('Puppetter selectors works', async () => {
-
-        const page = await openPage({browser, url: `file://${__dirname}/files/page.html`})
-
-        const target = await page.$('.target');
-
-        expect(target).not.toBeNull();
-
-        if (target) {
-            const text = await (await target.getProperty('textContent')).jsonValue();
-            expect(text).toEqual('TARGET');
-
-        }
-    })
 });
-

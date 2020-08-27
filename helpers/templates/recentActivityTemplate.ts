@@ -2,7 +2,12 @@ export const recentActivityTemplate = {
     recentActivity: {
         selector: '.feed-shared-update-v2',
         fields: {
-            activity: '.feed-shared-text-view'
+            activity: '.feed-shared-text-view',
+            post_author: '.feed-shared-actor__name',
+            post_author_description: '.feed-shared-actor__description',
+            post_text: '.feed-shared-update-v2__commentary',
+            reaction_count: '.social-details-social-counts__reactions',
+            comments_count: '.social-details-social-counts__comments'
         }
     }
 }

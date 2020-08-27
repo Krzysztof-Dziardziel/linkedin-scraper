@@ -4,17 +4,16 @@ import {openPage} from "../openPage";
 import {prepareForScraping} from "../prepareForScraping";
 import {recentActivityTemplate} from "../templates/recentActivityTemplate";
 import {ScrapeConfig} from "../profile/scrapeProfile";
-import {scrapeSection} from "../scrapeSection";
+import {scrapeProfileSection} from "../scrapeProfileSection";
+import {getRecentActivityFields} from "./getRecentActivityFields";
 
 //https://www.linkedin.com/in/some-random-person-123/detail/recent-activity/
 //https://www.linkedin.com/in/agata-jakobczak-akademia-face/detail/recent-activity/
 
 export const scrapeRecentActivity = async (
     {browser, url, cookies}: ScrapeProfileObject,
-    {getContact, waitTime, timeout}: ScrapeConfig = {getContact: true, waitTime: 50, timeout: 5000}
-): Promise<any[]> => {
-    // console.warn('EXPERIMENTAL!')
-    // console.log(`starting scraping recentActivity url: ${url}`)
+    {waitTime, timeout}: ScrapeConfig = {getContact: true, waitTime: 50, timeout: 5000}
+): Promise<any> => {
     const page = await openPage({browser, cookies, url})
 
     if(timeout) {
@@ -26,14 +25,7 @@ export const scrapeRecentActivity = async (
 
         await prepareForScraping(page, waitTime);
     }
-
-    const recentActivity = await scrapeSection(page, recentActivityTemplate.recentActivity)
-
+    const recentActivity = await getRecentActivityFields(page)
     await page.close()
-    // console.log(`finished scraping url: ${url}`)
-
-//@ts-ignore
-//     const cleanedProfile = cleanProfileData(rawProfile)
     return recentActivity
-
 }

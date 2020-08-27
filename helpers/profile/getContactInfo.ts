@@ -1,6 +1,6 @@
 import {Page} from "puppeteer";
 import {ContactObject} from "../interfaces/profileObjectInterface";
-import {scrapeSection} from "../scrapeSection";
+import {scrapeProfileSection} from "../scrapeProfileSection";
 
 const SEE_MORE_SELECTOR = 'a[data-control-name=contact_see_more]'
 const CLOSE_MODAL_SELECTOR = '.artdeco-modal__dismiss';
@@ -36,7 +36,7 @@ export const getContactInfo = async (page: Page):Promise<ContactObject[]|undefin
                 console.error('contact info was not found')
             })
 
-        const contactInfo = await scrapeSection(page, template)
+        const contactInfo = await scrapeProfileSection(page, template)
         const closeButton = await page.$(CLOSE_MODAL_SELECTOR)
         if (closeButton)
             await closeButton.click()

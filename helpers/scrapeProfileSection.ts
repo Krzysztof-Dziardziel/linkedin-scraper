@@ -42,7 +42,7 @@ const scrapeProfileSelector = (selector: any, section: any) =>
     Object.keys(section.fields)
         .reduce(scrapeProfileSelectorFields(selector, section), Promise.resolve({}))
 
-export const scrapeSection = async (page: Page, section: any): Promise<any[]> => {
+export const scrapeProfileSection = async (page: Page, section: any): Promise<any[]> => {
     const sectionSelectors = await page.$$(section.selector)
 
     const scrapedPromises = sectionSelectors

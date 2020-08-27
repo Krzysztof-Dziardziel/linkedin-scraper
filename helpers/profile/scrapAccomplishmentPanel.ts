@@ -1,5 +1,5 @@
 import {Page} from "puppeteer";
-import {scrapeSection} from "../scrapeSection";
+import {scrapeProfileSection} from "../scrapeProfileSection";
 import {profileTemplate} from "../templates/profileTemplate";
 import {Language, Project} from "../interfaces/profileObjectInterface";
 
@@ -14,6 +14,6 @@ export const scrapAccomplishmentPanel = async (page: Page, section: string): Pro
         }, queryString);
 
         //@ts-ignore
-        return scrapeSection(page, profileTemplate[section]);
+        return scrapeProfileSection(page, profileTemplate[section]);
     }
 };
