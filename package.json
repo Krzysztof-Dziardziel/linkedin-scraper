@@ -7,8 +7,9 @@
     "scraper",
     "crawler"
   ],
-  "main": "helpers/scrapeLinkedIn.ts",
   "scripts": {
+    "start": "ts-node scrapeTest.ts",
+    "debug": "DEBUG=linkedin ts-node scrapeTest.ts",
     "test": "jest"
   },
   "repository": {
@@ -29,6 +30,7 @@
   "devDependencies": {
     "@types/jest": "^26.0.10",
     "@types/node": "^14.6.0",
+    "debug": "^4.1.1",
     "jest": "^26.4.2",
     "jest-runner-groups": "^2.0.1",
     "jest-runtime": "^26.4.2",

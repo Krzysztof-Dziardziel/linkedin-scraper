@@ -7,12 +7,10 @@ import {ScrapePageObject} from "./interfaces/interfaces";
 export const scrapePage = async ({browser, url, cookies}: ScrapePageObject) => {
     let profile, recentActivity, company;
 
-
     if (url?.includes('/company')) {
         company = await scrapeCompany(browser, cookies, url);
         return {company};
     } else if (url?.includes('/recent-activity')) {
-        console.warn('Scraping recent Activiity')
         recentActivity = await scrapeRecentActivity({browser, url, cookies});
         profile = await scrapeProfile({browser, url: recentURLToProfile(url), cookies});
         return {profile, recentActivity};

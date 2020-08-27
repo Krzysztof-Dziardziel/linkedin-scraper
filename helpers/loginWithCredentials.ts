@@ -1,10 +1,11 @@
 import {openPage} from "./openPage";
 import {LoginObject} from "./interfaces/interfaces";
+const debug = require('debug')('linkedin')
 
 export const loginWithCredentials = async ({browser, email, password}: LoginObject): Promise<void> => {
     const url = 'https://www.linkedin.com/login'
     const page = await openPage({browser, url})
-    console.log(`logging at: ${url}`)
+    debug(`logging at: ${url}`)
 
     await page.goto(url)
     await page.waitFor('#username')
@@ -21,7 +22,7 @@ export const loginWithCredentials = async ({browser, email, password}: LoginObje
         timeout: 15000
     })
         .then(async () => {
-            console.log('logged feed page selector found')
+            debug('logged feed page selector found')
             await page.close()
         })
         .catch(async () => {
@@ -54,12 +55,12 @@ export const loginWithCredentials = async ({browser, email, password}: LoginObje
             })
 
             if (emailError) {
-                console.log('wrong username element found')
+                debug('wrong username element found')
                 return Promise.reject(new Error(`linkedin: invalid username: ${email}`))
             }
 
             if (passwordError) {
-                console.log('wrong password element found')
+                debug('wrong password element found')
                 return Promise.reject(new Error('linkedin: invalid password'))
             }
 

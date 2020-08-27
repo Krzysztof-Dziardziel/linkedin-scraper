@@ -1,13 +1,14 @@
 import {Page} from "puppeteer";
 import {scrollToPageBottom} from "./scrollToPageBottom";
 import {seeMoreButtons} from "./seeMoreButtons";
+const debug = require('debug')('linkedin')
 
 export const prepareForScraping = async (page: Page, waitTime: number) => {
-    console.log('scrolling page to the bottom')
+    debug('scrolling page to the bottom')
     await scrollToPageBottom(page)
 
     if (waitTime) {
-        console.log(`applying 1st delay`)
+        debug(`applying 1st delay`)
         await new Promise((resolve) => {
             setTimeout(() => {
                 resolve()
@@ -18,7 +19,7 @@ export const prepareForScraping = async (page: Page, waitTime: number) => {
     await seeMoreButtons(page)
 
     if (waitTime) {
-        console.log(`applying 2nd (and last) delay`)
+        debug(`applying 2nd (and last) delay`)
         await new Promise((resolve) => {
             setTimeout(() => {
                 resolve()
