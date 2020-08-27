@@ -82,11 +82,11 @@ describe('Puppeteer parsing works.', () => {
 
         const page = await openPage({browser, url: `file://${__dirname}/files/activity.html`})
 
-        let s = recentActivityTemplate.recentActivity.selector;
+        let s = recentActivityTemplate.selector;
 
         const target = await page.$$(s);
 
-        const fields = await Promise.all(target.map(el => el.$(recentActivityTemplate.recentActivity.fields.activity)))
+        const fields = await Promise.all(target.map(el => el.$(recentActivityTemplate.fields.activity)))
 
         expect(fields.length).toBeGreaterThan(0);
 
